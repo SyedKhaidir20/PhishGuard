@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #0056b3;
+    --accent-color: #007bff;
+    --background-color: #f4f7f6;
+    --card-background: #ffffff;
+    --text-color: #333333;
+    --light-text-color: #666666;
+    --border-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.08);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: var(--card-background);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    max-width: 800px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+    font-weight: 700;
+    font-size: 2.2em;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 20px;
+}
+
+.question {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    transition: all 0.2s ease-in-out;
+}
+
+.question:hover {
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.question h3 {
+    margin-top: 0;
+    color: var(--text-color);
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-size: 1.05em;
+}
+
+.option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.option label {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    color: var(--light-text-color);
+    transition: color 0.2s ease-in-out;
+}
+
+.option label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    background: #fff;
+    transition: all 0.2s ease-in-out;
+}
+
+.option input[type="radio"]:checked + label {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.option input[type="radio"]:checked + label:before {
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
+}
+
+.option input[type="radio"]:checked + label:after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 15px 25px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        padding: 25px;
+        margin: 10px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 30px;
+    }
+
+    .question {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .question h3 {
+        font-size: 1.2em;
+    }
+
+    .option label {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.6em;
+    }
+
+    button[type="submit"] {
+        font-size: 1em;
+        padding: 12px 20px;
+    }
+}

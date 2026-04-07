@@ -1,0 +1,351 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 20px;
+}
+
+.nav-bar {
+  background-color: #007bff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.nav-bar button {
+  background-color: white;
+  color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.nav-bar button:hover {
+  background-color: #e9ecef;
+}
+
+.nav-bar button.active {
+  background-color: #0056b3;
+  color: white;
+}
+
+.container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+  color: #555;
+}
+
+input, textarea, select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+button {
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button.danger {
+  background-color: #dc3545;
+}
+
+button.danger:hover {
+  background-color: #c82333;
+}
+
+.success {
+  color: #28a745;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.error {
+  color: #dc3545;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.stat-card {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  border-left: 4px solid #007bff;
+}
+
+.stat-number {
+  font-size: 2em;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.stat-label {
+  color: #666;
+  margin-top: 5px;
+}
+
+.login-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+.role-admin {
+  background-color: #dc3545;
+}
+
+.role-user {
+  background-color: #28a745;
+}
+
+.email-template {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 10px;
+  border-left: 4px solid #007bff;
+}
+
+.simulation-target {
+  background-color: #fff3cd;
+  border: 1px solid #ffeaa7;
+  padding: 15px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.file-upload {
+  border: 2px dashed #007bff;
+  padding: 30px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.file-upload:hover {
+  background-color: #e9ecef;
+}
+
+.file-upload input {
+  display: none;
+}
+
+
+@media (max-width: 768px) {
+  .nav-bar {
+    padding: 10px;
+  }
+  
+  .nav-bar button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    font-size: 14px;
+  }
+  
+  .container {
+    padding: 20px;
+    margin: 10px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  
+  table {
+    font-size: 12px;
+  }
+  
+  th, td {
+    padding: 8px;
+  }
+}
+
+
+.quiz-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.quiz-link:hover {
+    background-color: #218838;
+}
+
+.question {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.option {
+    margin: 10px 0;
+}
+
+.result-card {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.danger {
+    background-color: #dc3545;
+}
+
+.danger:hover {
+    background-color: #c82333;
+}
+
+/* ===== LOGIN PAGE ===== */
+.login-wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f1f5f9;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 380px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    border: 1px solid #e5e7eb;
+}
+
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+.login-form input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.login-form input:focus {
+    border-color: #2563eb;
+    outline: none;
+}
+
+.login-form button {
+    margin-top: 10px;
+    padding: 12px;
+    background: #2563eb;
+    color: white;
+    border-radius: 6px;
+    border: none;
+}
+
+.login-form button:hover {
+    background: #1d4ed8;
+}
