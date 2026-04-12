@@ -4,7 +4,7 @@ include 'config.php';
 $score = 0;
 $total = 0;
 
-// ambil jawapan betul
+/* ===== KIRA SCORE ===== */
 $stmt = $pdo->query("SELECT * FROM questions");
 
 $i = 0;
@@ -34,40 +34,96 @@ while ($row = $stmt->fetch()) {
     $i++;
 }
 
+/* ===== KIRA PERCENT & RISK ===== */
+$percentage = ($total > 0) ? ($score / $total) * 100 : 0;
+$risk = ($percentage >= 70) ? 'low' : 'high';
+
+/* ===== AMBIL EMAIL ===== */
+$email = $_POST['email'] ?? '';
+
+/* ===== UPDATE DATABASE ===== */
+if (!empty($email)) {
+
+    $stmt = $pdo->prepare("
+        UPDATE simulation_results 
+        SET quiz_score = ?, risk_level = ?, data_submitted = 1
+        WHERE user_email = ?
+        ORDER BY id DESC
+        LIMIT 1
+    ");
+
+    $stmt->execute([$score, $risk, $email]);
+}
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>Result</title>
+<title>Quiz Result</title>
 
 <style>
 body {
     font-family: 'Segoe UI';
+    background: #f1f5f9;
     text-align: center;
-    margin-top: 100px;
+    padding-top: 100px;
+}
+
+.card {
+    background: white;
+    display: inline-block;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+.score {
+    font-size: 28px;
+    margin: 15px 0;
+}
+
+.low {
+    color: green;
+    font-weight: bold;
+}
+
+.high {
+    color: red;
+    font-weight: bold;
+}
+
+a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background: #1d4ed8;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
 }
 </style>
 </head>
 
 <body>
 
+<div class="card">
+
 <h1>Quiz Result</h1>
 
-<h2><?= $score ?> / <?= $total ?></h2>
+<div class="score">
+    <?= $score ?> / <?= $total ?>
+</div>
 
-<?php
-$percentage = ($score / $total) * 100;
+<?php if ($risk == 'low'): ?>
+    <p class="low">Low Risk</p>
+<?php else: ?>
+    <p class="high">High Risk</p>
+<?php endif; ?>
 
-if ($percentage >= 70) {
-    echo "<h3 style='color:green;'>Low Risk</h3>";
-} else {
-    echo "<h3 style='color:red;'>High Risk</h3>";
-}
-?>
-
-<br><br>
 <a href="phishing_quiz.php">Try Again</a>
+
+</div>
 
 </body>
 </html>

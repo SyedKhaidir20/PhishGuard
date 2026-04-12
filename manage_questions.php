@@ -44,23 +44,29 @@ $questions = $stmt->fetchAll();
     --danger: #dc2626;
 }
 
-/* BODY */
+/* ===== BODY ===== */
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
     background: var(--bg);
     display: flex;
+    height: 100vh;
+    overflow: hidden;
 }
 
-/* SIDEBAR */
+/* ===== SIDEBAR ===== */
 .nav-bar {
-    width: 220px;
-    height: 100vh;
+    width: 240px;
     background: var(--sidebar);
     display: flex;
     flex-direction: column;
     padding: 20px 10px;
-    position: fixed;
+    transition: 0.3s;
+}
+
+/* OPTIONAL: collapse sidebar */
+.nav-bar.collapsed {
+    width: 70px;
 }
 
 .nav-bar button {
@@ -72,6 +78,8 @@ body {
     margin: 5px 0;
     border-radius: 8px;
     cursor: pointer;
+    transition: 0.2s;
+    width: 100%;
 }
 
 .nav-bar button:hover {
@@ -88,13 +96,14 @@ body {
     margin-right: 10px;
 }
 
-/* CONTENT */
+/* ===== MAIN CONTENT (FULL WIDTH) ===== */
 .container {
-    margin-left: 240px;
+    flex: 1; /* penting untuk full screen */
     padding: 30px;
-    width: 100%;
+    overflow-y: auto;
 }
 
+/* ===== HEADER ===== */
 .container h2 {
     margin-bottom: 5px;
 }
@@ -102,6 +111,132 @@ body {
 .container h3 {
     margin-top: 25px;
     color: var(--text-light);
+}
+
+/* ===== CARD ===== */
+form, .email-template {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+/* ===== FORM ===== */
+form label {
+    font-weight: 500;
+    margin-top: 12px;
+    display: block;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(29,78,216,0.1);
+}
+
+/* ===== FILE UPLOAD ===== */
+.file-upload-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.file-upload-button {
+    background: var(--primary);
+    border: none;
+    padding: 8px 14px;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.file-upload-button:hover {
+    opacity: 0.9;
+}
+
+.file-upload-filename {
+    font-size: 13px;
+    color: var(--text-light);
+}
+
+/* ===== BUTTON ===== */
+form button[type="submit"] {
+    margin-top: 20px;
+    padding: 12px;
+    background: var(--success);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+    opacity: 0.9;
+}
+
+/* ===== EMAIL PREVIEW ===== */
+.email-template h4 {
+    margin-bottom: 10px;
+    color: var(--text-light);
+}
+
+#previewContent {
+    background: #f9fafb;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+}
+
+/* ===== ALERT ===== */
+.success, .error {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.success {
+    background: #ecfdf5;
+    color: #065f46;
+}
+
+.error {
+    background: #fef2f2;
+    color: #7f1d1d;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+    body {
+        flex-direction: column;
+    }
+
+    .nav-bar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .container {
+        padding: 20px;
+    }
 }
 
 /* TABLE */
@@ -137,6 +272,21 @@ th {
 
 .delete {
     background: var(--danger);
+}
+td:last-child {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.action-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    font-size: 13px;
+    white-space: nowrap;
 }
 </style>
 </head>

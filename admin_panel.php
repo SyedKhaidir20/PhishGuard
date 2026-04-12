@@ -51,17 +51,23 @@ body {
     font-family: 'Segoe UI', sans-serif;
     background: var(--bg);
     display: flex;
+    height: 100vh;
+    overflow: hidden;
 }
 
 /* ===== SIDEBAR ===== */
 .nav-bar {
-    width: 220px;
-    height: 100vh;
+    width: 240px;
     background: var(--sidebar);
     display: flex;
     flex-direction: column;
     padding: 20px 10px;
-    position: fixed;
+    transition: 0.3s;
+}
+
+/* OPTIONAL: collapse sidebar */
+.nav-bar.collapsed {
+    width: 70px;
 }
 
 .nav-bar button {
@@ -74,6 +80,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: 0.2s;
+    width: 100%;
 }
 
 .nav-bar button:hover {
@@ -90,11 +97,11 @@ body {
     margin-right: 10px;
 }
 
-/* ===== MAIN CONTENT ===== */
+/* ===== MAIN CONTENT (FULL WIDTH) ===== */
 .container {
-    margin-left: 240px;
+    flex: 1; /* penting untuk full screen */
     padding: 30px;
-    width: 100%;
+    overflow-y: auto;
 }
 
 /* ===== HEADER ===== */
@@ -111,9 +118,10 @@ body {
 form, .email-template {
     background: var(--white);
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 12px;
     border: 1px solid var(--border);
     margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
 }
 
 /* ===== FORM ===== */
@@ -132,6 +140,7 @@ form textarea {
     border-radius: 6px;
     border: 1px solid var(--border);
     font-size: 14px;
+    transition: 0.2s;
 }
 
 form input:focus,
@@ -139,6 +148,7 @@ form select:focus,
 form textarea:focus {
     border-color: var(--primary);
     outline: none;
+    box-shadow: 0 0 0 2px rgba(29,78,216,0.1);
 }
 
 /* ===== FILE UPLOAD ===== */
@@ -215,18 +225,21 @@ form button[type="submit"]:hover {
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
+    body {
+        flex-direction: column;
+    }
+
     .nav-bar {
         width: 100%;
-        height: auto;
         flex-direction: row;
-        position: relative;
+        overflow-x: auto;
     }
 
     .container {
-        margin-left: 0;
         padding: 20px;
     }
 }
+
     </style>
 </head>
 <body>
