@@ -1,25 +1,14 @@
 <?php
+
+require_once __DIR__ . '/dompdf/autoload.inc.php';
+
+use Dompdf\Dompdf;
+
 include 'config.php';
 
-header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="phishing_simulation_results_' . date('Y-m-d') . '.csv"');
+$dompdf = new Dompdf();
 
-$output = fopen('php://output', 'w');
-
-
-fputcsv($output, [
-    'User Email', 
-    'Campaign', 
-    'Email Opened', 
-    'File Opened', 
-    'Link Clicked', 
-    'Data Submitted', 
-    'Quiz Score', 
-    'Risk Level', 
-    'Date'
-]);
-
-
+// Ambil data
 $results = $pdo->query("
     SELECT r.user_email, c.name as campaign_name, r.email_opened, r.file_opened, 
            r.link_clicked, r.data_submitted, r.quiz_score, r.risk_level, r.created_at
@@ -28,21 +17,47 @@ $results = $pdo->query("
     ORDER BY r.created_at DESC
 ")->fetchAll();
 
+// HTML
+$html = '
+<h2 style="text-align:center;">Phishing Simulation Results</h2>
+
+<table border="1" width="100%" cellspacing="0" cellpadding="5">
+<thead>
+<tr style="background:#f2f2f2;">
+<th>User Email</th>
+<th>Campaign</th>
+<th>Email Opened</th>
+<th>File Opened</th>
+<th>Link Clicked</th>
+<th>Data Submitted</th>
+<th>Quiz Score</th>
+<th>Risk Level</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+';
 
 foreach($results as $row) {
-    fputcsv($output, [
-        $row['user_email'],
-        $row['campaign_name'],
-        $row['email_opened'] ? 'Yes' : 'No',
-        $row['file_opened'] ? 'Yes' : 'No',
-        $row['link_clicked'] ? 'Yes' : 'No',
-        $row['data_submitted'] ? 'Yes' : 'No',
-        $row['quiz_score'] ? $row['quiz_score'].'/10' : 'N/A',
-        ucfirst($row['risk_level']),
-        $row['created_at']
-    ]);
+    $html .= '<tr>
+        <td>'.$row['user_email'].'</td>
+        <td>'.$row['campaign_name'].'</td>
+        <td>'.($row['email_opened'] ? 'Yes' : 'No').'</td>
+        <td>'.($row['file_opened'] ? 'Yes' : 'No').'</td>
+        <td>'.($row['link_clicked'] ? 'Yes' : 'No').'</td>
+        <td>'.($row['data_submitted'] ? 'Yes' : 'No').'</td>
+        <td>'.($row['quiz_score'] ? $row['quiz_score'].'/10' : 'N/A').'</td>
+        <td>'.ucfirst($row['risk_level']).'</td>
+        <td>'.$row['created_at'].'</td>
+    </tr>';
 }
 
-fclose($output);
-exit();
-?>
+$html .= '</tbody></table>';
+
+// Generate PDF
+$dompdf->loadHtml($html);
+$dompdf->setPaper('A4', 'landscape');
+$dompdf->render();
+$dompdf->stream("phishing_results.pdf", ["Attachment" => true]);
+
+exit;
