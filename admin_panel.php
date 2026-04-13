@@ -276,10 +276,6 @@ form button[type="submit"]:hover {
 
             <label>Attachment File (optional):</label>
             <div class="file-upload-wrapper">
-                <button type="button" class="file-upload-button">
-                    <i class="fas fa-paperclip"></i> Choose File
-                </button>
-                <span class="file-upload-filename" id="fileName">No file chosen</span>
                 <input type="file" name="attachment" id="fileInput" accept=".txt,.pdf,.doc,.docx" />
             </div>
             <p style="font-size: 12px; color: var(--text-color-light, #666);">Supported: .txt, .pdf, .doc, .docx</p>
